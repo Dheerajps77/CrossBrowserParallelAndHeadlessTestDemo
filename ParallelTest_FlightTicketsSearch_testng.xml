@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">
+  <test thread-count="1" name="Search Flight tickets in Chrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="TestClass.ParallelTest_FlightTicketsSearch">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="Search Flight tickets in Firefox">
+		<parameter name="browser" value="ff" />
+		<classes>
+			<class name="TestClass.ParallelTest_FlightTicketsSearch">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="Search Flight tickets in IE">
+		<parameter name="browser" value="ie" />
+		<classes>
+			<class name="TestClass.ParallelTest_FlightTicketsSearch">
+			</class>
+		</classes>
+	</test>
+</suite>

@@ -144,8 +144,10 @@ public class FlightTicketsSearchPage {
 			wait.until(ExpectedConditions.elementToBeClickable(btn_search));
 			btn_search.click();
 			
+			wait=new WebDriverWait(driver, 40);
+			wait.until(ExpectedConditions.visibilityOf(searchedResult));
 			String expectedSearchedResult=searchedResult.getText();
-			String actualSearchedResult="Sorry! We have gearched over 500+ airlines and unable to find flights as per your selected itinerary.".trim();						
+			String actualSearchedResult="Sorry! We have searched over 500+ airlines and unable to find flights as per your selected itinerary.".trim();						
 			if (actualSearchedResult.equalsIgnoreCase(expectedSearchedResult)) {				
 				flag=true;
 			} 

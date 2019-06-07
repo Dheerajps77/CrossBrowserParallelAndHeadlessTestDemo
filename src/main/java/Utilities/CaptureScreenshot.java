@@ -20,7 +20,7 @@ public class CaptureScreenshot {
 		try
 		{
 			Date date=Calendar.getInstance().getTime();
-			DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd''HHmmss");
+			DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd' 'HH mm ss");
 			 String strDate=dateFormat.format(date);			
 			screenshotPath=System.getProperty("user.dir")+"/Screenshots/"+screenshotName + strDate+".png";
 			

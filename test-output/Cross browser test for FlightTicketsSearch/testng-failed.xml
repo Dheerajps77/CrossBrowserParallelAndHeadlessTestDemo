@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Cross browser test for FlightTicketsSearch]">
+  <parameter name="browser" value="ie"/>
+  <test name="Cross browser test for FlightTicketsSearch(failed)">
+    <classes>
+      <class name="TestClass.CrossBrowserTest_FlightTicketsSearch">
+        <methods>
+          <include name="SearchTickets"/>
+          <include name="InitializingExtenReports"/>
+          <include name="CreateReport"/>
+          <include name="FlushingExtentReports"/>
+          <include name="TearDownApplication"/>
+          <include name="GetReportResult"/>
+          <include name="OpenBrowser"/>
+        </methods>
+      </class> <!-- TestClass.CrossBrowserTest_FlightTicketsSearch -->
+    </classes>
+  </test> <!-- Cross browser test for FlightTicketsSearch(failed) -->
+</suite> <!-- Failed suite [Cross browser test for FlightTicketsSearch] -->

@@ -10,7 +10,7 @@ import TestPage.FlightTicketsSearchPage;
 import Utilities.EnvironmentPropertiesReader;
 import Utilities.Log;
 
-public class FlightTicketsSearch extends TestBase {
+public class HeadLessBrowser_FlightTicketsSearch extends TestBase {
 	
 	FlightTicketsSearchPage objFlightTicketsSearchPage;
 	EnvironmentPropertiesReader objEnvironmentPropertiesReader;

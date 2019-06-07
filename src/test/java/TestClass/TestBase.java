@@ -9,7 +9,11 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -18,6 +22,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -30,11 +35,11 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import Utilities.CaptureScreenshot;
 import Utilities.Log;
 
-
 public class TestBase {
-	
+
 	String url = "https://www.tripiflights.com/";
-	String extentReportPath=System.getProperty("user.dir")+"/ExtentReports/"+this.getClass().getSimpleName()+".html";
+	String extentReportPath = System.getProperty("user.dir") + "/ExtentReports/" + this.getClass().getSimpleName()
+			+ ".html";
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions action;
@@ -45,15 +50,14 @@ public class TestBase {
 	ExtentHtmlReporter e1;
 	ExtentReports e2;
 	ExtentTest e3;
-	
+
 	@BeforeSuite
-	public void InitializingExtenReports()
-	{
-		file=new File(extentReportPath);
-		e1=new ExtentHtmlReporter(file);
-		e2=new ExtentReports();
+	public void InitializingExtenReports() {
+		file = new File(extentReportPath);
+		e1 = new ExtentHtmlReporter(file);
+		e2 = new ExtentReports();
 		e2.attachReporter(e1);
-		
+
 		e2.setSystemInfo("User Name", "DheerajPratapSingh@gmail.com");
 		e2.setSystemInfo("Tester Name", "Dheeraj Pratap Singh");
 		e2.setSystemInfo("Enviroment", "QA");
@@ -61,22 +65,21 @@ public class TestBase {
 		e2.setSystemInfo("Sprint Name", "Auqaman");
 		e2.setSystemInfo("Host Name", "KJKLEKWLKDJ23123");
 		e2.setSystemInfo("Host Number", "127.0.0.1");
-		
+
 		e1.config().setDocumentTitle(this.getClass().getSimpleName() + " Secenario Test for the TripFlights");
-		e1.config().setReportName(this.getClass().getSimpleName());		
+		e1.config().setReportName(this.getClass().getSimpleName());
 		e1.config().setTheme(Theme.DARK);
-		
+
 		try {
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.Error("Exception occurs !!!", e);
 		}
 	}
-	
+
 	@AfterSuite
-	public void FlushingExtentReports()
-	{
+	public void FlushingExtentReports() {
 		try {
 			e2.flush();
 		} catch (Exception e) {
@@ -84,68 +87,41 @@ public class TestBase {
 			Log.Error("Exception occurs !!!", e);
 		}
 	}
-	
-	@AfterMethod
-	public void GetReportResult(ITestResult result)
-	{
-		try
-		{
-			if (result.getStatus() == ITestResult.SUCCESS) {
-				e3.log(Status.PASS, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.GREEN));
-				e3.log(Status.PASS, result.getMethod().getMethodName() + " test passed");
-			}
-			
-			if (result.getStatus() == ITestResult.FAILURE) {
-				e3.log(Status.FAIL, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.RED));
-				e3.log(Status.FAIL, result.getMethod().getMethodName() + " test failed");
-				String screenshotCapturedString=CaptureScreenshot.ScreenshotCapture(driver, result.getMethod().getMethodName());
-				e3.addScreenCaptureFromPath(screenshotCapturedString);
-				e3.log(Status.FAIL, result.getThrowable().getCause());
-				e3.log(Status.FAIL, result.getThrowable().getMessage());
-			}
-			
-			if (result.getStatus() == ITestResult.SKIP) {
-				e3.log(Status.SKIP, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.YELLOW));
-				e3.log(Status.SKIP, result.getMethod().getMethodName() + " test skipped");
-				e3.log(Status.SKIP, result.getThrowable());
-			}
-			
-			if (result.getStatus() == ITestResult.SUCCESS_PERCENTAGE_FAILURE) {
-				e3.log(Status.FAIL, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.ORANGE));
-				e3.log(Status.FAIL, result.getThrowable());
-				e3.log(Status.FAIL, result.getMethod().getMethodName()
-						+ " module passed but with on Test Failed But Within Success Percentage.");
-			}
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
-		}
-	}
-	
-	@BeforeMethod
-	public void CreateReport(Method method)
-	{
-		try
-		{			
-			e3=e2.createTest(this.getClass().getSimpleName() + " : : "+ method.getName());
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);	
-		}
-	}
-	
+
 	@BeforeTest
-	public void OpenBrowser() {
+	@Parameters({ "browser" })
+	public void OpenBrowser(String browser) {
+		String chromePath = "";
+		String ffPath = "";
+		String iePath = "";
 		try {
 			log = Logger.getLogger(this.getClass().getSimpleName());
-			PropertyConfigurator.configure(System.getProperty("user.dir") + "/src/main/java/Config/log4j.properties");			
-			String driverPath = System.getProperty("user.dir") + "/Drivers/chromedriver.exe";
-			System.setProperty("webdriver.chrome.driver", driverPath);
-			driver = new ChromeDriver();
-			Log.Info("Invoked chrome browser");
+			PropertyConfigurator.configure(System.getProperty("user.dir") + "/src/main/java/Config/log4j.properties");
+
+			if (browser.equalsIgnoreCase("chrome")) {
+				
+				Log.Info("Invoked chrome browser");
+				chromePath = System.getProperty("user.dir") + "/Drivers/chromedriver.exe";
+				System.setProperty("webdriver.chrome.driver", chromePath);
+				driver = new ChromeDriver();
+			} else if (browser.equalsIgnoreCase("ff")) {
+				
+				Log.Info("Invoked firefox browser");				
+				ffPath = System.getProperty("user.dir") + "/Drivers/geckodriver.exe";
+				DesiredCapabilities caps = new DesiredCapabilities();
+			    caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);
+				System.setProperty("webdriver.gecko.driver", ffPath);
+				driver = new FirefoxDriver(caps);
+			}
+
+			else if (browser.equalsIgnoreCase("ie")) {
+				Log.Info("Invoked internet explrore browser");
+				iePath = System.getProperty("user.dir") + "/Drivers/IEDriverServer.exe";
+				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);								
+				System.setProperty("webdriver.ie.driver", iePath);								
+				driver = new InternetExplorerDriver(capabilities);
+			}
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
 			driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
@@ -153,23 +129,77 @@ public class TestBase {
 			driver.get(url);
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);			
+			Log.Error("Exception occurs !!!", e);
 		}
 	}
-	
-	
+
 	@AfterTest
 	public void TearDownApplication() {
 		try {
 			Log.Info("Closing browser session");
-			if (driver != null) {			
+			if (driver != null) {
 				driver.quit();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.Error("Exception occures : ", e);
 		}
 	}
 
+	@AfterMethod
+	public void GetReportResult(ITestResult result) {
+		try {
+			if (result.getStatus() == ITestResult.SUCCESS) {
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module started");
+				e3.log(Status.PASS, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.GREEN));
+				e3.log(Status.PASS, result.getMethod().getMethodName() + " test passed");
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");
+			}
+
+			if (result.getStatus() == ITestResult.FAILURE) {
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module started");
+				e3.log(Status.FAIL, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.RED));
+				e3.log(Status.FAIL, result.getMethod().getMethodName() + " test failed");
+				e3.log(Status.FAIL, result.getThrowable());
+				String screenshotCapturedString = CaptureScreenshot.ScreenshotCapture(driver,
+						result.getMethod().getMethodName());
+				e3.addScreenCaptureFromPath(screenshotCapturedString);
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");
+				e3.log(Status.FAIL, result.getThrowable().getCause());
+				e3.log(Status.FAIL, result.getThrowable().getMessage());
+			}
+
+			if (result.getStatus() == ITestResult.SKIP) {
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module started");
+				e3.log(Status.SKIP, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.YELLOW));
+				e3.log(Status.SKIP, result.getMethod().getMethodName() + " test skipped");
+				e3.log(Status.SKIP, result.getThrowable());
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");
+			}
+
+			if (result.getStatus() == ITestResult.SUCCESS_PERCENTAGE_FAILURE) {
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module started");
+				e3.log(Status.FAIL, MarkupHelper.createLabel(result.getMethod().getMethodName(), ExtentColor.ORANGE));
+				e3.log(Status.FAIL, result.getThrowable());
+				e3.log(Status.FAIL, result.getMethod().getMethodName()
+						+ " module passed but with on Test Failed But Within Success Percentage.");
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.Error("Exception occurs !!!", e);
+		}
+	}
+
+	@BeforeMethod
+	public void CreateReport(Method method) {
+		try {
+			e3 = e2.createTest(this.getClass().getSimpleName() + " : : test case is -> " + method.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.Error("Exception occurs !!!", e);
+		}
+	}
 }

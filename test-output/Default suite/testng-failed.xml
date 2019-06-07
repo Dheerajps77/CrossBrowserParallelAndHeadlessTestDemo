@@ -6,12 +6,7 @@
       <class name="TestClass.FlightTicketsSearch">
         <methods>
           <include name="InitializingExtenReports"/>
-          <include name="CreateReport"/>
-          <include name="FlushingExtentReports"/>
-          <include name="TearDownApplication"/>
-          <include name="GetReportResult"/>
           <include name="SearchTickets"/>
-          <include name="OpenBrowser"/>
         </methods>
       </class> <!-- TestClass.FlightTicketsSearch -->
     </classes>
