@@ -7,11 +7,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -89,8 +96,8 @@ public class TestBase {
 	}
 
 	@BeforeTest
-	@Parameters({ "browser" })
-	public void OpenBrowser(String browser) {
+	@Parameters({ "browser","HeadLessYes"})
+	public void OpenBrowser(String browser, String HeadLessYes) {
 		String chromePath = "";
 		String ffPath = "";
 		String iePath = "";
@@ -98,35 +105,66 @@ public class TestBase {
 			log = Logger.getLogger(this.getClass().getSimpleName());
 			PropertyConfigurator.configure(System.getProperty("user.dir") + "/src/main/java/Config/log4j.properties");
 
-			if (browser.equalsIgnoreCase("chrome")) {
+			if (browser.equalsIgnoreCase("chrome")) {	
 				
 				Log.Info("Invoked chrome browser");
 				chromePath = System.getProperty("user.dir") + "/Drivers/chromedriver.exe";
 				System.setProperty("webdriver.chrome.driver", chromePath);
-				driver = new ChromeDriver();
+				
+				if(HeadLessYes.equalsIgnoreCase("yes"))
+				{					
+					ChromeOptions chromeOptions=new ChromeOptions();
+					chromeOptions.addArguments("window-size=1400,600");
+					chromeOptions.addArguments("headless");
+					driver=new ChromeDriver(chromeOptions);					
+				}
+				else {					
+					driver = new ChromeDriver();
+					driver.manage().window().maximize();
+				}	
+				
 			} else if (browser.equalsIgnoreCase("ff")) {
 				
 				Log.Info("Invoked firefox browser");				
 				ffPath = System.getProperty("user.dir") + "/Drivers/geckodriver.exe";
+				
 				DesiredCapabilities caps = new DesiredCapabilities();
 			    caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);
 				System.setProperty("webdriver.gecko.driver", ffPath);
-				driver = new FirefoxDriver(caps);
+				
+				if(HeadLessYes.equalsIgnoreCase("yes"))
+				{
+					Log.Info("Headless mode is invoked");
+					FirefoxBinary firefoxBinary=new FirefoxBinary();
+					//firefoxBinary.addCommandLineOptions("window-size=1400,600");
+					firefoxBinary.addCommandLineOptions("--headless");
+					
+					 
+					FirefoxOptions firefoxOptions = new FirefoxOptions();
+				    firefoxOptions.setBinary(firefoxBinary);
+				    driver = new FirefoxDriver(firefoxOptions);				    
+				}
+				else {
+					driver = new FirefoxDriver(caps);
+					driver.manage().window().maximize();
+				}					
 			}
 
 			else if (browser.equalsIgnoreCase("ie")) {
+				
 				Log.Info("Invoked internet explrore browser");
 				iePath = System.getProperty("user.dir") + "/Drivers/IEDriverServer.exe";
+				
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 				capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);								
 				System.setProperty("webdriver.ie.driver", iePath);								
 				driver = new InternetExplorerDriver(capabilities);
-			}
-			driver.manage().window().maximize();
+				driver.manage().window().maximize();
+			}			
 			driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);			
+			driver.get(url);			
 			Log.Info("Invoked url " + url);
-			driver.get(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.Error("Exception occurs !!!", e);

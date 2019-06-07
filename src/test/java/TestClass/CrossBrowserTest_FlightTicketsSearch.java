@@ -7,13 +7,13 @@ import org.testng.annotations.Test;
 
 
 import TestPage.FlightTicketsSearchPage;
-import Utilities.EnvironmentPropertiesReader;
+import Utilities.EnvironmentPropertiesReaderForLogMessage;
 import Utilities.Log;
 
 public class CrossBrowserTest_FlightTicketsSearch extends TestBase {
 	
 	FlightTicketsSearchPage objFlightTicketsSearchPage;
-	EnvironmentPropertiesReader objEnvironmentPropertiesReader;
+	EnvironmentPropertiesReaderForLogMessage objEnvironmentPropertiesReader;
 	Properties properties;
 	@Test
 	public void SearchTickets()
@@ -22,7 +22,7 @@ public class CrossBrowserTest_FlightTicketsSearch extends TestBase {
 		Log.StartLog("SearchTickets test has been started");
 		objFlightTicketsSearchPage=new FlightTicketsSearchPage(driver);		
 		try {
-			objEnvironmentPropertiesReader=EnvironmentPropertiesReader.getInstance();
+			objEnvironmentPropertiesReader=EnvironmentPropertiesReaderForLogMessage.getInstance();
 			properties=objEnvironmentPropertiesReader.PropertiesFile();
 			
 			objFlightTicketsSearchPage.EnterCityDetailsForFromAirport();

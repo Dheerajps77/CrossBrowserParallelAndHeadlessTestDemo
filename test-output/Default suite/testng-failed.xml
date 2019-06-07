@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="TestClass.FlightTicketsSearch">
+      <class name="TestClass.HeadLessBrowser_FlightTicketsSearch">
         <methods>
           <include name="InitializingExtenReports"/>
           <include name="SearchTickets"/>
         </methods>
-      </class> <!-- TestClass.FlightTicketsSearch -->
+      </class> <!-- TestClass.HeadLessBrowser_FlightTicketsSearch -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

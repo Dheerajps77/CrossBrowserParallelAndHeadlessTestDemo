@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Headless test for flight tickets search]">
+  <parameter name="HeadLessYes" value="yes"/>
+  <parameter name="browser" value="ff"/>
+  <test name="Headless test for flight tickets search(failed)">
+    <classes>
+      <class name="TestClass.HeadLessBrowser_FlightTicketsSearch">
+        <methods>
+          <include name="InitializingExtenReports"/>
+          <include name="CreateReport"/>
+          <include name="FlushingExtentReports"/>
+          <include name="TearDownApplication"/>
+          <include name="SearchTickets"/>
+          <include name="GetReportResult"/>
+          <include name="OpenBrowser"/>
+        </methods>
+      </class> <!-- TestClass.HeadLessBrowser_FlightTicketsSearch -->
+    </classes>
+  </test> <!-- Headless test for flight tickets search(failed) -->
+</suite> <!-- Failed suite [Headless test for flight tickets search] -->
