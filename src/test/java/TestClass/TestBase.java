@@ -112,7 +112,8 @@ public class TestBase {
 				System.setProperty("webdriver.chrome.driver", chromePath);
 				
 				if(HeadLessYes.equalsIgnoreCase("yes"))
-				{					
+				{
+					Log.Info("Headless mode is invoked");
 					ChromeOptions chromeOptions=new ChromeOptions();
 					chromeOptions.addArguments("window-size=1400,600");
 					chromeOptions.addArguments("headless");

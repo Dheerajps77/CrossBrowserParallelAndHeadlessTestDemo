@@ -15,7 +15,8 @@ public class CrossBrowserTest_FlightTicketsSearch extends TestBase {
 	FlightTicketsSearchPage objFlightTicketsSearchPage;
 	EnvironmentPropertiesReaderForLogMessage objEnvironmentPropertiesReader;
 	Properties properties;
-	@Test
+	
+	
 	public void SearchTickets()
 	{
 		

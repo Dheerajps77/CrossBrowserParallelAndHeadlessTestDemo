@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Headless test for flight tickets search]">
-  <parameter name="HeadLessYes" value="yes"/>
-  <parameter name="browser" value="ff"/>
-  <test name="Headless test for flight tickets search(failed)">
+<suite name="Failed suite [Cross browser test for FlightTicketsSearch]" parallel="methods">
+  <parameter name="browser" value="chrome"/>
+  <test name="Cross browser test for FlightTicketsSearch(failed)" parallel="methods">
     <classes>
-      <class name="TestClass.HeadLessBrowser_FlightTicketsSearch">
+      <class name="TestClass.CrossBrowserTest_FlightTicketsSearch">
         <methods>
-          <include name="InitializingExtenReports"/>
-          <include name="CreateReport"/>
-          <include name="FlushingExtentReports"/>
-          <include name="TearDownApplication"/>
           <include name="SearchTickets"/>
-          <include name="GetReportResult"/>
-          <include name="OpenBrowser"/>
+          <include name="InitializingExtenReports"/>
         </methods>
-      </class> <!-- TestClass.HeadLessBrowser_FlightTicketsSearch -->
+      </class> <!-- TestClass.CrossBrowserTest_FlightTicketsSearch -->
     </classes>
-  </test> <!-- Headless test for flight tickets search(failed) -->
-</suite> <!-- Failed suite [Headless test for flight tickets search] -->
+  </test> <!-- Cross browser test for FlightTicketsSearch(failed) -->
+</suite> <!-- Failed suite [Cross browser test for FlightTicketsSearch] -->
