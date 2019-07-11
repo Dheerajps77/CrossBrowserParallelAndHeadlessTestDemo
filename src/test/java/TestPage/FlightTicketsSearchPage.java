@@ -50,6 +50,7 @@ public class FlightTicketsSearchPage {
 	@FindBy(how = How.XPATH, using = "//div[@class='search__NotFound']//strong")
 	public WebElement searchedResult;
 
+	
 	public void EnterCityDetailsForFromAirport() {
 		try {						
 			Log.Info("FROM --> Entered the City name : DEL");
@@ -71,7 +72,7 @@ public class FlightTicketsSearchPage {
 			Log.Error("Exception occurs !!! ", e);
 		}
 	}
-
+	
 	public void EnterDates() {
 		try {
 
@@ -134,7 +135,7 @@ public class FlightTicketsSearchPage {
 			Log.Error("Exception occurs !!!", e);
 		}
 	}
-	
+		
 	public boolean ClickOnSearchButton()
 	{
 		boolean flag=false;

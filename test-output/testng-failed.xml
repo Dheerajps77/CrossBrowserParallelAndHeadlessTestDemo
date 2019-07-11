@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Cross browser test for FlightTicketsSearch]" parallel="methods">
-  <parameter name="browser" value="chrome"/>
-  <test name="Cross browser test for FlightTicketsSearch(failed)" parallel="methods">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="TestClass.CrossBrowserTest_FlightTicketsSearch">
+      <class name="SeleniumExceptionHandling.NoSuchElement">
         <methods>
-          <include name="SearchTickets"/>
           <include name="InitializingExtenReports"/>
+          <include name="NoSuchElementHandleTest"/>
         </methods>
-      </class> <!-- TestClass.CrossBrowserTest_FlightTicketsSearch -->
+      </class> <!-- SeleniumExceptionHandling.NoSuchElement -->
     </classes>
-  </test> <!-- Cross browser test for FlightTicketsSearch(failed) -->
-</suite> <!-- Failed suite [Cross browser test for FlightTicketsSearch] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

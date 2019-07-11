@@ -11,6 +11,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+
 public class CaptureScreenshot {
 	
 		
@@ -34,5 +35,13 @@ public class CaptureScreenshot {
 		}	
 		return screenshotPath;
 	}
+	
+	/*
+	 * //Text attachments for Allure
+	 * 
+	 * @Attachment(value = "Page screenshot", type = "image/png") public static
+	 * byte[] saveScreenshotPNG (WebDriver driver) { return
+	 * ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES); }
+	 */
 
 }

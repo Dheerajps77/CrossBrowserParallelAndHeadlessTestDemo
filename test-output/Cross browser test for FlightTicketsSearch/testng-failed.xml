@@ -2,12 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Cross browser test for FlightTicketsSearch]" parallel="methods">
   <parameter name="browser" value="chrome"/>
+  <parameter name="HeadLess" value="no"/>
   <test name="Cross browser test for FlightTicketsSearch(failed)" parallel="methods">
     <classes>
       <class name="TestClass.CrossBrowserTest_FlightTicketsSearch">
         <methods>
-          <include name="SearchTickets"/>
           <include name="InitializingExtenReports"/>
+          <include name="CreateReport"/>
+          <include name="FlushingExtentReports"/>
+          <include name="TearDownApplication"/>
+          <include name="GetReportResult"/>
+          <include name="VerifySignUpLinkTest"/>
+          <include name="OpenBrowser"/>
         </methods>
       </class> <!-- TestClass.CrossBrowserTest_FlightTicketsSearch -->
     </classes>

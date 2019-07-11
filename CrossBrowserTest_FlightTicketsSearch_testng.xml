@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Cross browser test for FlightTicketsSearch" parallel="methods">
 <parameter name="browser" value="chrome"/>
-<parameter name="HeadLessYes" value="no"/>
+<parameter name="HeadLess" value="no"/>
   <test thread-count="1" name="Cross browser test for FlightTicketsSearch">
     <classes>
       <class name="TestClass.CrossBrowserTest_FlightTicketsSearch"/>

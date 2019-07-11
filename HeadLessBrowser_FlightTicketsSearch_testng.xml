@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Headless test for flight tickets search">
 <parameter name="browser" value="chrome"/>
-<parameter name="HeadLessYes" value="yes"/>
+<parameter name="HeadLess" value="yes"/>
   <test name="Headless test for flight tickets search">  
     <classes>
       <class name="TestClass.HeadLessBrowser_FlightTicketsSearch"/>

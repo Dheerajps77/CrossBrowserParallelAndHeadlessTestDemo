@@ -42,12 +42,13 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import Utilities.CaptureScreenshot;
 import Utilities.Log;
 
+
 public class TestBase {
 
 	String url = "https://www.tripiflights.com/";
 	String extentReportPath = System.getProperty("user.dir") + "/ExtentReports/" + this.getClass().getSimpleName()
 			+ ".html";
-	WebDriver driver;
+	protected WebDriver driver;
 	WebDriverWait wait;
 	Actions action;
 	int enterNumberOfMonth = 3;
@@ -95,9 +96,10 @@ public class TestBase {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@BeforeTest
-	@Parameters({ "browser","HeadLessYes"})
-	public void OpenBrowser(String browser, String HeadLessYes) {
+	@Parameters({ "browser","HeadLess"})
+	public void OpenBrowser(String browser, String HeadLess) {
 		String chromePath = "";
 		String ffPath = "";
 		String iePath = "";
@@ -111,7 +113,7 @@ public class TestBase {
 				chromePath = System.getProperty("user.dir") + "/Drivers/chromedriver.exe";
 				System.setProperty("webdriver.chrome.driver", chromePath);
 				
-				if(HeadLessYes.equalsIgnoreCase("yes"))
+				if(HeadLess.equalsIgnoreCase("yes"))
 				{
 					Log.Info("Headless mode is invoked");
 					ChromeOptions chromeOptions=new ChromeOptions();
@@ -133,14 +135,11 @@ public class TestBase {
 			    caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, false);
 				System.setProperty("webdriver.gecko.driver", ffPath);
 				
-				if(HeadLessYes.equalsIgnoreCase("yes"))
+				if(HeadLess.equalsIgnoreCase("yes"))
 				{
 					Log.Info("Headless mode is invoked");
-					FirefoxBinary firefoxBinary=new FirefoxBinary();
-					//firefoxBinary.addCommandLineOptions("window-size=1400,600");
-					firefoxBinary.addCommandLineOptions("--headless");
-					
-					 
+					FirefoxBinary firefoxBinary=new FirefoxBinary();					
+					firefoxBinary.addCommandLineOptions("--headless");					
 					FirefoxOptions firefoxOptions = new FirefoxOptions();
 				    firefoxOptions.setBinary(firefoxBinary);
 				    driver = new FirefoxDriver(firefoxOptions);				    
@@ -203,9 +202,9 @@ public class TestBase {
 				e3.log(Status.FAIL, result.getThrowable());
 				String screenshotCapturedString = CaptureScreenshot.ScreenshotCapture(driver,
 						result.getMethod().getMethodName());
+				//CaptureScreenshot.saveScreenshotPNG(driver);
 				e3.addScreenCaptureFromPath(screenshotCapturedString);
-				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");
-				e3.log(Status.FAIL, result.getThrowable().getCause());
+				e3.log(Status.INFO, result.getMethod().getMethodName() + " test module completed");				
 				e3.log(Status.FAIL, result.getThrowable().getMessage());
 			}
 

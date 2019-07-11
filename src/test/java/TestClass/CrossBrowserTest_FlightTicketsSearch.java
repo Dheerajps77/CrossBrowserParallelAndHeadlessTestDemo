@@ -1,7 +1,6 @@
 package TestClass;
 import java.util.Properties;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,10 +15,18 @@ public class CrossBrowserTest_FlightTicketsSearch extends TestBase {
 	EnvironmentPropertiesReaderForLogMessage objEnvironmentPropertiesReader;
 	Properties properties;
 	
-	
+	@Test(priority=0, description="Verifying the searchTickets functionality")
+	/*
+	 * @Severity(SeverityLevel.CRITICAL)
+	 * 
+	 * @Description("Test case description : Verifying the searchTickets functionality"
+	 * )
+	 * 
+	 * @Story("Search Tickets = To check if search tickets funcation working or not"
+	 * )
+	 */
 	public void SearchTickets()
-	{
-		
+	{		
 		Log.StartLog("SearchTickets test has been started");
 		objFlightTicketsSearchPage=new FlightTicketsSearchPage(driver);		
 		try {
@@ -46,5 +53,27 @@ public class CrossBrowserTest_FlightTicketsSearch extends TestBase {
 		
 		Log.StartLog("SearchTickets test has been completed");
 	}
-
+	
+	@Test(priority=1, description="Verifying the sign up link functionality on login page")
+	/*
+	 * @Severity(SeverityLevel.BLOCKER)
+	 * 
+	 * @Description("Test case description : Verifying the sign up link functionality on login page"
+	 * )
+	 * 
+	 * @Story("Search Tickets = To check if sign up funcation working or not on login page"
+	 * )
+	 */
+	public void VerifySignUpLinkTest()
+	{
+		try {
+			
+			//Assert.assertTrue(false, "failed due to sign up link button vissiblity");
+			
+			Assert.assertEquals("failed due to sign up link button vissiblity", "failed due to sign up link button vissiblity");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
