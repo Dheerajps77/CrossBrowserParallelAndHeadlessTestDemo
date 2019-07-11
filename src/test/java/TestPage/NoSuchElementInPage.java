@@ -9,8 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -125,6 +127,14 @@ public class NoSuchElementInPage {
 			else {
 				System.out.println("Occured stale reference exception");
 			}
+			WebElement element=null;
+			Select selctSelect=new Select(element);
+			selctSelect.deselectAll();
+			
+			Actions actions=new Actions(driver); //The user-facing API for emulating 
+			//complex user gestures. Use this class rather than using theKeyboard or Mouse directly. 
+
+			Action actionaAction; //Interface representing a single user-interaction action.
 			
 		} catch (Exception e) {
 			e.printStackTrace();
