@@ -81,8 +81,7 @@ public class TestBase {
 		try {
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
+			e.printStackTrace();			
 		}
 	}
 
@@ -91,8 +90,7 @@ public class TestBase {
 		try {
 			e2.flush();
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
+			e.printStackTrace();			
 		}
 	}
 
@@ -166,8 +164,7 @@ public class TestBase {
 			driver.get(url);			
 			Log.Info("Invoked url " + url);
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
+			e.printStackTrace();			
 		}
 	}
 
@@ -180,8 +177,7 @@ public class TestBase {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			Log.Error("Exception occures : ", e);
+			e.printStackTrace();			
 		}
 	}
 
@@ -227,7 +223,6 @@ public class TestBase {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
 		}
 	}
 
@@ -237,7 +232,6 @@ public class TestBase {
 			e3 = e2.createTest(this.getClass().getSimpleName() + " : : test case is -> " + method.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.Error("Exception occurs !!!", e);
 		}
 	}
 }

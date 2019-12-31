@@ -2,6 +2,7 @@ package TestClass;
 import java.util.Properties;
 
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
