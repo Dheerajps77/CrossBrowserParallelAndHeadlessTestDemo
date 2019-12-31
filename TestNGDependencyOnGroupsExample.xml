@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNGDependencyOnGroupsExample" parallel="none">
+  <test name="TestNGDependencyOnGroupsExample">
+    <classes>
+      <class name="Groups.TestNGDependencyOnGroupsExample"/>
+    </classes>
+  </test>
+</suite>

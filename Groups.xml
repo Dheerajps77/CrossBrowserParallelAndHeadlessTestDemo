@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="none">
-  <test name="Test">
+<suite name="Groups In TestNG" parallel="none">
+  <test name="Groups">
     <classes>
       <class name="Groups.GroupsDemo"/>
+      <groups>
+      <run>
+      <include name="Smoke"/>
+      </run>
+      </groups>      
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  </test>
+</suite>

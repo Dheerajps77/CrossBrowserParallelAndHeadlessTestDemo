@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class GroupsDemo {
 	
 	
-	@Test
+	@Test(priority=0,groups="Smoke")
 	public void Test1()
 	{
 		try {
@@ -15,7 +15,7 @@ public class GroupsDemo {
 		}
 	}
 
-	@Test
+	@Test(priority=1,groups="Sanity")
 	public void Test2()
 	{
 		try {
@@ -25,7 +25,7 @@ public class GroupsDemo {
 		}
 	}
 
-	@Test
+	@Test(priority=2,groups="Sanity")
 	public void Test3()
 	{
 		try {
@@ -35,7 +35,7 @@ public class GroupsDemo {
 		}
 	}
 
-	@Test
+	@Test(priority=3,groups="Smoke")
 	public void Test4()
 	{
 		try {
@@ -45,4 +45,13 @@ public class GroupsDemo {
 		}
 	}
 
+	@Test(priority=4,groups="Smoke")
+	public void Test5()
+	{
+		try {
+			System.out.println("I am in Test5");
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }
